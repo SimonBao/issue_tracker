@@ -36,10 +36,11 @@ IssueRow.propTypes = {
 }
 
 
+
 IssueRow.defaultProps = {
   issue: React.PropTypes.shape({
     title: '-- No title!! --'
-  })
+  }),
 }
 
 class Button extends React.Component {
