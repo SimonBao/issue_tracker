@@ -92,16 +92,12 @@ var IssueRow = function (_React$Component2) {
 }(React.Component);
 
 IssueRow.propTypes = {
-  issue: React.PropTypes.shape({
-    id: React.PropTypes.number.isRequired,
-    title: React.PropTypes.string
-  })
+  issue_id: React.PropTypes.number.isRequired,
+  issue_title: React.PropTypes.string
 };
 
 IssueRow.defaultProps = {
-  issue: React.PropTypes.shape({
-    title: '-- No title!! --'
-  })
+  issue_title: "-- no title --"
 };
 
 var Button = function (_React$Component3) {
@@ -127,16 +123,16 @@ var Button = function (_React$Component3) {
   return Button;
 }(React.Component);
 
-var IssueTable = function (_React$Component4) {
-  _inherits(IssueTable, _React$Component4);
+var IssuesTable = function (_React$Component4) {
+  _inherits(IssuesTable, _React$Component4);
 
-  function IssueTable() {
-    _classCallCheck(this, IssueTable);
+  function IssuesTable() {
+    _classCallCheck(this, IssuesTable);
 
-    return _possibleConstructorReturn(this, (IssueTable.__proto__ || Object.getPrototypeOf(IssueTable)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (IssuesTable.__proto__ || Object.getPrototypeOf(IssuesTable)).apply(this, arguments));
   }
 
-  _createClass(IssueTable, [{
+  _createClass(IssuesTable, [{
     key: 'render',
     value: function render() {
       var issueRows = this.props.issues.map(function (issue) {
@@ -145,7 +141,7 @@ var IssueTable = function (_React$Component4) {
       console.log({ issueRows: issueRows });
       return React.createElement(
         'table',
-        { className: 'bordered-table' },
+        null,
         React.createElement(
           'thead',
           null,
@@ -198,7 +194,7 @@ var IssueTable = function (_React$Component4) {
     }
   }]);
 
-  return IssueTable;
+  return IssuesTable;
 }(React.Component);
 
 var IssueAdd = function (_React$Component5) {
@@ -232,10 +228,6 @@ var issues = [{
   id: 2, status: 'Assigned', owner: 'Matt',
   created: new Date('2018-04-02'), effort: 2, completionDate: new Date('2018-04-03'),
   title: 'Missing bottom border on panel'
-}, {
-  id: 3, status: 'Assigned', owner: 'Jim',
-  created: new Date('2018-04-02'), effort: 2, completionDate: new Date('2018-04-03'),
-  title: ''
 }];
 
 var IssueList = function (_React$Component6) {

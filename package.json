@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "echo \"No Testing Framework\"",
-    "compile": "babel src --presets react,es2015 --out-dir static",
+    "compile": "babel src--presets react,es2015 --out-dir static",
     "watch": "babel src --presets react,es2015 --out-dir static --watch"
 
   },
