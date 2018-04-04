@@ -274,9 +274,7 @@ var IssueList = function (_React$Component6) {
     var _this6 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
     _this6.state = { issues: [] };
-    _this6.createTestIssue = _this6.createTestIssue.bind(_this6);
     _this6.createIssue = _this6.createIssue.bind(_this6);
-    setTimeout(_this6.createTestIssue, 2000);
     return _this6;
   }
 
@@ -287,13 +285,6 @@ var IssueList = function (_React$Component6) {
       newIssue.id = this.state.issues.length + 1;
       newIssues.push(newIssue);
       this.setState({ issues: newIssues });
-    }
-  }, {
-    key: 'createTestIssue',
-    value: function createTestIssue() {
-      this.createIssue({
-        status: 'New', owner: 'Pieta', created: new Date(), effort: 0, completionDate: undefined, title: 'Anytime'
-      });
     }
   }, {
     key: 'updateState',
@@ -323,11 +314,6 @@ var IssueList = function (_React$Component6) {
         React.createElement(IssueFilter, null),
         React.createElement('hr', null),
         React.createElement(IssueTable, { issues: this.state.issues }),
-        React.createElement(
-          'button',
-          { onClick: this.createTestIssue },
-          'Add Issue'
-        ),
         React.createElement('hr', null),
         React.createElement(IssueAdd, { createIssue: this.createIssue })
       );

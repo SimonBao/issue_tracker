@@ -132,22 +132,13 @@ class IssueList extends React.Component {
   constructor() {
     super();
     this.state = { issues: [] }
-    this.createTestIssue = this.createTestIssue.bind(this);
     this.createIssue = this.createIssue.bind(this);
-    setTimeout(this.createTestIssue, 2000);
   }
-
   createIssue(newIssue) {
     const newIssues = this.state.issues.slice();
     newIssue.id = this.state.issues.length + 1;
     newIssues.push(newIssue);
     this.setState({ issues: newIssues });
-  }
-
-  createTestIssue() {
-    this.createIssue({
-      status: 'New', owner: 'Pieta', created: new Date(), effort: 0, completionDate: undefined, title: 'Anytime'
-    });
   }
 
   updateState() {
@@ -167,7 +158,6 @@ class IssueList extends React.Component {
         < IssueFilter />
         <hr />
         < IssueTable issues={this.state.issues} />
-        < button onClick={this.createTestIssue}>Add Issue</button>
         <hr />
         < IssueAdd createIssue={this.createIssue}/>
       </div>
