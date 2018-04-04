@@ -207,16 +207,43 @@ var IssueAdd = function (_React$Component5) {
   function IssueAdd() {
     _classCallCheck(this, IssueAdd);
 
-    return _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).apply(this, arguments));
+    var _this5 = _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).call(this));
+
+    _this5.handleSubmit = _this5.handleSubmit.bind(_this5);
+    return _this5;
   }
 
   _createClass(IssueAdd, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var form = document.forms.issueAdd;
+      this.props.createIssue({
+        status: 'New',
+        created: new Date(),
+        owner: form.owner.value,
+        title: form.title.value
+      });
+      form.owner.value = '';
+      form.title.value = '';
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
-        { id: 'issueAdd' },
-        'Placeholder for IssueAdd'
+        null,
+        React.createElement(
+          'form',
+          { id: 'issueAdd', onSubmit: this.handleSubmit },
+          React.createElement('input', { type: 'text', name: 'owner', placeholder: 'Owner' }),
+          React.createElement('input', { type: 'text', name: 'title', placeholder: 'Title' }),
+          React.createElement(
+            'button',
+            null,
+            'Add'
+          )
+        )
       );
     }
   }]);
@@ -246,8 +273,10 @@ var IssueList = function (_React$Component6) {
 
     var _this6 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
-    _this6.state = { issues: issues };
-    setTimeout(_this6.createTestIssue.bind(_this6), 2000);
+    _this6.state = { issues: [] };
+    _this6.createTestIssue = _this6.createTestIssue.bind(_this6);
+    _this6.createIssue = _this6.createIssue.bind(_this6);
+    setTimeout(_this6.createTestIssue, 2000);
     return _this6;
   }
 
@@ -267,6 +296,20 @@ var IssueList = function (_React$Component6) {
       });
     }
   }, {
+    key: 'updateState',
+    value: function updateState() {
+      var _this7 = this;
+
+      setTimeout(function () {
+        _this7.setState({ issues: issues });
+      }, 500);
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.updateState();
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -280,8 +323,13 @@ var IssueList = function (_React$Component6) {
         React.createElement(IssueFilter, null),
         React.createElement('hr', null),
         React.createElement(IssueTable, { issues: this.state.issues }),
+        React.createElement(
+          'button',
+          { onClick: this.createTestIssue },
+          'Add Issue'
+        ),
         React.createElement('hr', null),
-        React.createElement(IssueAdd, null)
+        React.createElement(IssueAdd, { createIssue: this.createIssue })
       );
     }
   }]);

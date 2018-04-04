@@ -78,9 +78,33 @@ class IssueTable extends React.Component {
 }
 
 class IssueAdd extends React.Component {
+  constructor(){
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e){
+    e.preventDefault();
+    var form = document.forms.issueAdd;
+    this.props.createIssue({
+      status: 'New',
+      created: new Date(),
+      owner: form.owner.value,
+      title: form.title.value
+    });
+    form.owner.value = '';
+    form.title.value = '';
+  }
+
   render() {
     return (
-      <div id='issueAdd'>Placeholder for IssueAdd</div>
+      <div>
+        <form id='issueAdd' onSubmit={this.handleSubmit}>
+          <input type='text' name='owner' placeholder='Owner'></input>
+          <input type='text' name='title' placeholder='Title'></input>
+          <button>Add</button>
+        </form>
+      </div>
     )
   }
 }
@@ -105,24 +129,37 @@ const issues = [
 
 
 class IssueList extends React.Component {
-  constructor(){
+  constructor() {
     super();
-    this.state = { issues: issues }
-    setTimeout(this.createTestIssue.bind(this), 2000);
+    this.state = { issues: [] }
+    this.createTestIssue = this.createTestIssue.bind(this);
+    this.createIssue = this.createIssue.bind(this);
+    setTimeout(this.createTestIssue, 2000);
   }
 
-  createIssue(newIssue){
+  createIssue(newIssue) {
     const newIssues = this.state.issues.slice();
     newIssue.id = this.state.issues.length + 1;
     newIssues.push(newIssue);
-    this.setState({ issues: newIssues});
+    this.setState({ issues: newIssues });
   }
 
-  createTestIssue(){
+  createTestIssue() {
     this.createIssue({
       status: 'New', owner: 'Pieta', created: new Date(), effort: 0, completionDate: undefined, title: 'Anytime'
     });
   }
+
+  updateState() {
+    setTimeout(() => {
+      this.setState({ issues: issues })
+    }, 500);
+  }
+
+  componentDidMount() {
+    this.updateState();
+  }
+
   render() {
     return (
       <div id='issueList'>
@@ -130,11 +167,14 @@ class IssueList extends React.Component {
         < IssueFilter />
         <hr />
         < IssueTable issues={this.state.issues} />
+        < button onClick={this.createTestIssue}>Add Issue</button>
         <hr />
-        < IssueAdd />
+        < IssueAdd createIssue={this.createIssue}/>
       </div>
     )
   }
 }
+
+
 
 ReactDOM.render(<IssueList />, contentNode);      // Render the component inside the content Node
