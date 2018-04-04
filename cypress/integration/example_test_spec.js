@@ -1,6 +1,12 @@
 describe('Homepage', function(){
-  it('has welcome message', function(){
+  
+  it('has loads web application', function(){
     cy.visit('localhost:3000')
-    cy.contains('Ravan').click()
   })
+
+  it('has Issue from owner "Ravan"', function(){
+    cy.visit('localhost:3000')
+    cy.contains('Ravan')
+  })
+
 })
