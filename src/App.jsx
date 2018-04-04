@@ -17,11 +17,7 @@ class IssueRow extends React.Component {
       <tr>
         <td>{issue.id}</td>
         <td>{issue.status}</td>
-        <td >
-          <form action="http://google.com">
-            <input type="submit" value={issue.owner} />
-          </form>
-        </td>
+        <td >{issue.owner}</td>
         <td>{issue.created.toDateString()}</td>
         <td>{issue.effort}</td>
         <td>{issue.completionDate ?
@@ -109,13 +105,31 @@ const issues = [
 
 
 class IssueList extends React.Component {
+  constructor(){
+    super();
+    this.state = { issues: issues }
+    setTimeout(this.createTestIssue.bind(this), 2000);
+  }
+
+  createIssue(newIssue){
+    const newIssues = this.state.issues.slice();
+    newIssue.id = this.state.issues.length + 1;
+    newIssues.push(newIssue);
+    this.setState({ issues: newIssues});
+  }
+
+  createTestIssue(){
+    this.createIssue({
+      status: 'New', owner: 'Pieta', created: new Date(), effort: 0, completionDate: undefined, title: 'Anytime'
+    });
+  }
   render() {
     return (
       <div id='issueList'>
         <h1>Issue Tracker</h1>
         < IssueFilter />
         <hr />
-        < IssueTable issues={issues} />
+        < IssueTable issues={this.state.issues} />
         <hr />
         < IssueAdd />
       </div>
