@@ -62,7 +62,11 @@ var IssueRow = function (_React$Component2) {
         React.createElement(
           'td',
           null,
-          issue.owner
+          React.createElement(
+            'form',
+            { action: 'http://google.com' },
+            React.createElement('input', { type: 'submit', value: issue.owner })
+          )
         ),
         React.createElement(
           'td',

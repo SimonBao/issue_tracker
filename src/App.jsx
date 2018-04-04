@@ -17,7 +17,11 @@ class IssueRow extends React.Component {
       <tr>
         <td>{issue.id}</td>
         <td>{issue.status}</td>
-        <td>{issue.owner}</td>
+        <td >
+          <form action="http://google.com">
+            <input type="submit" value={issue.owner} />
+          </form>
+        </td>
         <td>{issue.created.toDateString()}</td>
         <td>{issue.effort}</td>
         <td>{issue.completionDate ?
@@ -53,26 +57,26 @@ class Button extends React.Component {
 
 
 class IssueTable extends React.Component {
-  render(){
-    const issueRows = this.props.issues.map(issue => <IssueRow key={issue.id} issue={issue}/>)
-    console.log({issueRows})
-    return(
-        <table className='bordered-table'>
-          <thead>
-            <tr>
-              <th>Id</th>      
-              <th>Status</th>      
-              <th>Owner</th>            
-              <th>Created</th>      
-              <th>Effort</th>      
-              <th>Completion Date</th>      
-              <th>Title</th>    
-            </tr>  
-          </thead>
-          <tbody> 
-            {issueRows}
-          </tbody>
-        </table>
+  render() {
+    const issueRows = this.props.issues.map(issue => <IssueRow key={issue.id} issue={issue} />)
+    console.log({ issueRows })
+    return (
+      <table className='bordered-table'>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Status</th>
+            <th>Owner</th>
+            <th>Created</th>
+            <th>Effort</th>
+            <th>Completion Date</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          {issueRows}
+        </tbody>
+      </table>
     )
   }
 }
