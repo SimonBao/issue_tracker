@@ -58,9 +58,7 @@ const issueFieldType = {
 function validateIssue(issue) {
   if(issueFieldType){
     for(const field in issueFieldType) {
-      console.log('field: ', field);
       const type = issueFieldType[field];
-      console.log('type: ', type);
       if (!type) {
         //edge case - unknown field obtained
         delete issue[field];
