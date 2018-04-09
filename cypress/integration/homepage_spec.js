@@ -9,4 +9,13 @@ describe('Homepage', function(){
     cy.contains('Ravan')
   })
 
+  it('adds issue', function(){
+    cy.visit('localhost:3000')
+    cy.get('#issueAdd > [name="owner"]').type('James')
+    cy.get('#issueAdd > [name="title"]').type('James Book')
+    cy.get('#issueAdd').submit()
+    cy.contains('James')
+    cy.contains('James Book')
+  })
+
 })
