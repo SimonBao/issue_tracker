@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -w app.js app.js",
+    "start": "nodemon -w app.js server/app.js",
     "test": "node_modules/.bin/cypress",
     "compile": "babel src--presets react,es2015 --out-dir static",
     "watch": "babel src --presets react,es2015 --out-dir static --watch"
