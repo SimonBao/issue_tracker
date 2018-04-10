@@ -4,6 +4,7 @@ const express = require('express');
 //express web application framework for serving data
 const bodyParser = require('body-parser');
 //body-parser middleware to extract data from request body
+const MongoClient = require('mongodb').MongoClient;
 const app = express();
 //instantiates express;
 app.use(express.static('static'));
@@ -11,23 +12,40 @@ app.use(express.static('static'));
 //built in express middleware to serve html files relative to request path
 app.use(bodyParser.json());
 //add bodyParser middleware layer to extract request body into a json obect
-const issues = [
-  {
-    id: 1, status: 'Open', owner: 'Ravan',
-    created: new Date('2016-08-15'), effort: 5, completionDate: undefined,
+const issues = [{
+    id: 1,
+    status: 'Open',
+    owner: 'Ravan',
+    created: new Date('2016-08-15'),
+    effort: 5,
+    completionDate: undefined,
     title: 'Error in console when clicking Add',
   },
   {
-    id: 2, status: 'Assigned', owner: 'Eddie',
-    created: new Date('2016-08-16'), effort: 14, completionDate: new Date('2016-08-30'),
+    id: 2,
+    status: 'Assigned',
+    owner: 'Eddie',
+    created: new Date('2016-08-16'),
+    effort: 14,
+    completionDate: new Date('2016-08-30'),
     title: 'Missing bottom border on panel',
   },
 ];
 //temporary server in-memory issues
 
 app.get('/api/issues', (req, res) => {
-  const metadata = { total_count: issues.length };
-  res.json({ _metadata: metadata, records: issues });
+  console.log(db);
+  db.collection('issues').find().toArray().then(issues => {
+    const metadata = {
+      total_count: issues.length
+    };
+    res.json({
+      _metadata: metadata,
+      records: issues
+    });
+  }).catch(error => {
+    console.log(error);
+  });
 });
 //defined get route to serve a json response with metadata about the data and also
 //serve the issues
@@ -56,8 +74,8 @@ const issueFieldType = {
 //field type check
 
 function validateIssue(issue) {
-  if(issueFieldType){
-    for(const field in issueFieldType) {
+  if (issueFieldType) {
+    for (const field in issueFieldType) {
       const type = issueFieldType[field];
       if (!type) {
         //edge case - unknown field obtained
@@ -70,12 +88,12 @@ function validateIssue(issue) {
       }
     }
   }
-  
+
 
   if (!validIssueStatus[issue.status])
-  //if the issue status is not one of the approve statuses 
+    //if the issue status is not one of the approve statuses 
     return `${issue.status} is not a valid status.`;
-    //return invalid status error
+  //return invalid status error
 
   return null;
   //return nothing is there are no errors
@@ -92,7 +110,9 @@ app.post('/api/issues', (req, res) => {
   //checks for any errors during newIssue validation check
   if (err) {
     //error occured in check execute block
-    res.status(422).json({ message: `Invalid requrest: ${err}` });
+    res.status(422).json({
+      message: `Invalid requrest: ${err}`
+    });
     //change status code to reflect error (unprocessible entity)
     //pass a message with the status
     return;
@@ -103,7 +123,22 @@ app.post('/api/issues', (req, res) => {
   //send a json response with the newIssue object
 });
 
-app.listen(3000, () => {
-  console.log('App started on port 3000');
+let db;
+
+
+
+MongoClient.connect('mongodb://localhost').then(connection => {
+  db = connection.db('issueTracker');
+  app.listen(3000, () => {
+    console.log('Server on: localhost:3000')
+  });
 });
+
+// MongoClient.connect('mongodb://localhost:27017', (err, client) => {
+//   // Client returned
+//   db = client.db('issueTracker');
+//   app.listen(3000, () => {
+//     console.log('Server on: localhost:3000')
+//   });
+// });
 //set server to listen at port 3000
