@@ -16,7 +16,10 @@
   "dependencies": {
     "body-parser": "1.15.2",
     "express": "^4.14.0",
-    "mongodb": "^3.0.5"
+    "mongodb": "^3.0.5",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
