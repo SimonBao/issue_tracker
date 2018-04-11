@@ -53,4 +53,3 @@ function validateIssue(issue) {
 exports.default = {
   validateIssue: validateIssue
 };
-//# sourceMappingURL=issue.js.map

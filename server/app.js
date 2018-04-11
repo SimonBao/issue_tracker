@@ -8,6 +8,8 @@ import bodyParser from 'body-parser';
 import {MongoClient} from 'mongodb';
 import Issue from './issue.js'
 import 'babel-polyfill'
+import SourceMapSupport from 'source-map-support';
+
 
 const app = express();
 //instantiates express;

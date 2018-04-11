@@ -16,14 +16,18 @@ var _issue2 = _interopRequireDefault(_issue);
 
 require('babel-polyfill');
 
+var _sourceMapSupport = require('source-map-support');
+
+var _sourceMapSupport2 = _interopRequireDefault(_sourceMapSupport);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//express web application framework for serving data
+//body-parser middleware to extract data from request body
 
 var app = (0, _express2.default)();
 //instantiates express;
 
-//body-parser middleware to extract data from request body
+//express web application framework for serving data
 
 app.use(_express2.default.static('static'));
 //add middleware layer to handle static routing
@@ -89,4 +93,3 @@ _mongodb.MongoClient.connect('mongodb://localhost').then(function (connection) {
   });
 });
 //set server to listen at port 3000 on sucessful MongoClient connection
-//# sourceMappingURL=app.js.map
