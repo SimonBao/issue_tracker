@@ -1,11 +1,14 @@
-'use strict'
 
-const express = require('express');
+import express from 'express';
 //express web application framework for serving data
-const bodyParser = require('body-parser');
+
+import bodyParser from 'body-parser';
 //body-parser middleware to extract data from request body
-const MongoClient = require('mongodb').MongoClient;
-const Issue = require('./issue.js')
+
+import {MongoClient} from 'mongodb';
+import Issue from './issue.js'
+import 'babel-polyfill'
+
 const app = express();
 //instantiates express;
 app.use(express.static('static'));
