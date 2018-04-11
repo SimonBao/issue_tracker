@@ -11,16 +11,12 @@ const path = require('path')
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-
-
-
 module.exports = {
   entry: "./src/App.jsx",
-
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'static')
-  },
+  } ,
 
   module: {
     rules: [{
@@ -37,5 +33,9 @@ module.exports = {
     }]
   },
 
-  plugins: [new UglifyJSPlugin()]
+  plugins: [new UglifyJSPlugin(),
+      new webpack.ProvidePlugin({
+        "React": "react",
+      }),
+    ]
 }
