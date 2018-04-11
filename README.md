@@ -2,6 +2,9 @@
   - undefined db functions
     - resolved by updating code to match latest mongodb(3.6.3) syntax.
     - resources used: [stackoverflow post](https://stackoverflow.com/questions/47662220/db-collection-is-not-a-function-when-using-mongoclient-v3-0/47662979)
+  - Migration from Webpack 3 to 4
+    - Plugins(react) failed working due to removal of CommonsChunkPlugin
+    - Fixed through use of ProvidePlugin in similar usage 
     
 ### For people on version 3.0 of the MongoDB native NodeJS driver:
 (This is applicable to people with "mongodb": "^3.0.0-rc0", or a later version in package.json, that want to keep using the latest version.) 
