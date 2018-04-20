@@ -24,6 +24,7 @@
     "mongodb": "^3.0.5",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
+    "react-router-dom": "^4.2.2",
     "source-map-support": "^0.5.4",
     "webpack-visualizer-plugin": "^0.1.11",
     "whatwg-fetch": "^2.0.4"
