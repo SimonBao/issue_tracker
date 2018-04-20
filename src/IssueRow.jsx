@@ -1,8 +1,8 @@
 'use strict';
-
+import { Link } from 'react-router-dom'
 const IssueRow = (props) => (
   <tr>
-    <td>{props.issue.id}</td>
+    <td><Link to={`/issues/${props.issue._id}`}>{props.issue.id}</Link></td>
     <td>{props.issue.status}</td>
     <td>{props.issue.owner}</td>
     <td>{props.issue.created.toDateString()}</td>
