@@ -1,5 +1,5 @@
-const webpack = require('webpack')
-const path = require('path')
+const webpack = require("webpack");
+const path = require("path");
 
 /*
  * We've enabled UglifyJSPlugin for you! This minifies your app
@@ -9,33 +9,41 @@ const path = require('path')
  *
  */
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   entry: "./src/App.jsx",
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'static')
-  } ,
-
-  module: {
-    rules: [{
-      test: /\.jsx$/,
-      exclude: /node_modules/,
-
-      use: [{
-        loader: 'babel-loader',
-
-        options: {
-          presets: ['env', 'react', 'es2015']
-        }
-      }]
-    }]
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "static"),
+    publicPath: "/"
   },
 
-  plugins: [new UglifyJSPlugin(),
-      new webpack.ProvidePlugin({
-        "React": "react",
-      }),
+  module: {
+    rules: [
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+
+        use: [
+          {
+            loader: "babel-loader",
+
+            options: {
+              presets: ["env", "react", "es2015"]
+            }
+          }
+        ]
+      }
     ]
-}
+  },
+  devServer: {
+    historyApiFallback: true
+  },
+  plugins: [
+    new UglifyJSPlugin(),
+    new webpack.ProvidePlugin({
+      React: "react"
+    })
+  ]
+};
